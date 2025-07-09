@@ -1,0 +1,33 @@
+@import "tailwindcss";
+/* index.css or app.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================================
+   EHR Dashboard App Styles
+   ================================ */
+
+/* ===== CSS Variables ===== */
+:root {
+  --clr-black: #141414;
+  --clr-light-gray: #dcdcdc;
+  --clr-lemon: #f0ff50;
+  --clr-almost-white: #f0f0f0;
+  --clr-pear: #dcdc3c;
+
+  --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --transition-fast: 0.3s ease-in-out;
+}
+
+/* ===== Reset Styles ===== */
+* {
+
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--clr-almost-white);
+  color: var(--clr-black);
+}
