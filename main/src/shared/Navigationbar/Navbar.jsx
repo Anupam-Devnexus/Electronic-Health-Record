@@ -1,139 +1,201 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../../pages/auth/AuthContext"; // Adjust path as needed
+import { useAuth } from "../../pages/auth/AuthContext";
 
 export default function Navbar() {
-  const { user, setUser } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
+    const { user, setUser } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
 
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
 
-  // Close dropdown on outside click
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdownOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
-  if (!user) return null;
+    if (!user) return null;
 
-  // Role-based menu
-  const menuItems = {
-    admin: [
-      { label: "Dashboard", path: "/admin-dashboard" },
-      { label: "Users", path: "/admin/users" },
-      { label: "Settings", path: "/admin/settings" },
-    ],
-    doctor: [
-      { label: "Dashboard", path: "/doctor-dashboard" },
-      { label: "Appointments", path: "/doctor/appointments" },
-      { label: "Patients", path: "/doctor/patients" },
-    ],
-    labs: [
-      { label: "Dashboard", path: "/labs-dashboard" },
-      { label: "Tests", path: "/labs/tests" },
-      { label: "Reports", path: "/labs/reports" },
-    ],
-    accounts: [
-      { label: "Dashboard", path: "/accounts-dashboard" },
-      { label: "Invoices", path: "/accounts/invoices" },
-      { label: "Payments", path: "/accounts/payments" },
-    ],
-  };
+    const adminMenu = [
+        { label: "Dashboard", path: "/admin-dashboard" },
+        {
+            label: "Users",
+            subItems: [
+                { label: "Dashboard", path: "/admin/users" },
+                { label: "All Users", path: "/admin/users/allusers" },
+                { label: "Add User", path: "/admin/users/add" },
+            ],
+        },
+        {
+            label: "Labs",
+            subItems: [
+                { label: "Dashboard", path: "/admin/labs" },
+                { label: "Test Orders", path: "/admin/labs/orders" },
+                { label: "Reports", path: "/admin/labs/reports" },
+            ],
+        },
+        {
+            label: "Finance",
+            subItems: [
+                { label: "Dashboard", path: "/admin/finance" },
+                { label: "Billing", path: "/admin/finance/billing" },
+                { label: "Payments", path: "/admin/finance/payments" },
+                { label: "Revenue Reports", path: "/admin/finance/revenue" },
+            ],
+        },
+        {
+            label: "Pharmacy",
+            subItems: [
+                { label: "Dashboard", path: "/admin/pharmacy" },
+                { label: "Inventory", path: "/admin/pharmacy/inventory" },
+                { label: "Issue Medicine", path: "/admin/pharmacy/issue" },
+            ],
+        },
+        {
+            label: "Wards",
+            subItems: [
+                { label: "Dashboard", path: "/admin/wards" },
+                { label: "Patient Admissions", path: "/admin/wards/admissions" },
+                { label: "Bed Allocation", path: "/admin/wards/beds" },
+                { label: "Discharge", path: "/admin/wards/discharge" },
+            ],
+        },
+        {
+            label: "Reports",
+            subItems: [
+                { label: "Appointment Report", path: "/admin/reports/appointments" },
+                { label: "Revenue Report", path: "/admin/reports/revenue" },
+            ],
+        },
+        {
+            label: "Teams",
+            subItems: [
+                { label: "Dashboard", path: "/admin/teams" },
+                { label: "Doctors", path: "/admin/teams/doctors" },
+                { label: "Nurses", path: "/admin/teams/nurses" },
+                { label: "Labs Staff", path: "/admin/teams/labs" },
 
-  const links = menuItems[user.role] || [];
+            ],
+        },
+    ];
 
-  const handleLogout = () => {
-    setUser(null);
-    localStorage.clear();
-    navigate("/");
-  };
+    const menuItems = { admin: adminMenu, doctor: [{ label: "Dashboard", path: "/doctor-dashboard" }, { label: "Appointments", path: "/doctor/appointments" }, { label: "Patients", path: "/doctor/patients" },], labs: [{ label: "Dashboard", path: "/labs-dashboard" }, { label: "Tests", path: "/labs/tests" }, { label: "Reports", path: "/labs/reports" },], accounts: [{ label: "Dashboard", path: "/accounts-dashboard" }, { label: "Invoices", path: "/accounts/invoices" }, { label: "Payments", path: "/accounts/payments" },], };
 
-  return (
-    <nav className="bg-[#141414] text-white px-6 py-3 flex justify-between items-center shadow-md relative z-50">
-      {/* Left - Brand */}
-      <div className="text-2xl font-bold cursor-pointer select-none">
-        <Link to={`/${user.role}-dashboard`}>EHR System</Link>
-      </div>
+    const links = menuItems[user.role] || [];
 
-      {/* Center - Navigation Links */}
-      <ul className="hidden md:flex space-x-8">
-        {links.map(({ label, path }) => (
-          <li key={path}>
-            <Link
-              to={path}
-              className={`hover:text-[#dcdc3c] transition duration-200 ${
-                location.pathname === path ? "text-[#dcdc3c] font-semibold" : ""
-              }`}
-            >
-              {label}
-            </Link>
-          </li>
-        ))}
-      </ul>
+    const handleLogout = () => {
+        setUser(null);
+        localStorage.clear();
+        navigate("/");
+    };
 
-      {/* Right - Profile Dropdown */}
-      <div className="relative" ref={dropdownRef}>
-        <button
-          onClick={() => setDropdownOpen((prev) => !prev)}
-          className="flex items-center space-x-2 focus:outline-none"
-          aria-expanded={dropdownOpen}
-          aria-haspopup="true"
-        >
-          <div className="bg-[#dcdc3c] text-black rounded-full w-10 h-10 flex items-center justify-center uppercase font-bold select-none">
-            {(user.name && user.name[0]) || user.id[0] || "U"}
-          </div>
-          <span className="hidden md:block">
-            {user.name || user.id} <span className="text-gray-300 text-sm">({user.role})</span>
-          </span>
-          <svg
-            className={`w-4 h-4 ml-1 transition-transform duration-200 ${
-              dropdownOpen ? "rotate-180" : "rotate-0"
-            }`}
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-
-        {/* Dropdown Menu */}
-        {dropdownOpen && (
-          <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg text-black ring-1 ring-black ring-opacity-5">
-            <div className="px-4 py-3 border-b border-gray-200">
-              <p className="text-sm font-semibold">{user.name || user.id}</p>
-              <p className="text-xs text-gray-500 capitalize">{user.role}</p>
+    return (
+        <nav className="bg-[#141414] text-white px-6 py-3 flex justify-between items-center shadow-md relative z-50">
+            <div className="text-2xl font-bold cursor-pointer select-none flex items-center gap-2">
+                <img src="/logo.png" alt="logo" className="w-12" />
+                <Link to={`/${user.role}-dashboard`}>EHR</Link>
             </div>
-            <ul>
-              <li>
-                <Link
-                  to={`/${user.role}-dashboard`}
-                  className="block px-4 py-2 text-sm hover:bg-gray-100"
-                  onClick={() => setDropdownOpen(false)}
-                >
-                  Dashboard
-                </Link>
-              </li>
-              <li>
-                <button
-                  onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-red-600"
-                >
-                  Logout
-                </button>
-              </li>
+
+            <ul className="hidden md:flex space-x-6">
+                {links.map((item, idx) => {
+                    const isActive = item.path
+                        ? location.pathname === item.path
+                        : item.subItems?.some((sub) => location.pathname === sub.path);
+
+                    return (
+                        <li key={idx} className="relative group">
+                            {item.subItems ? (
+                                <>
+                                    <span
+                                        className={`cursor-pointer flex items-center gap-1 hover:text-[#dcdc3c] ${isActive ? "text-[#dcdc3c] font-semibold" : ""
+                                            }`}
+                                    >
+                                        {item.label} <span className="text-xs">▼</span>
+                                    </span>
+                                    <ul className="absolute left-0 top-full mt-2 w-48 bg-white text-black rounded-md shadow-md z-50 opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-all duration-200">
+                                        {item.subItems.map((sub) => (
+                                            <li key={sub.path}>
+                                                <Link
+                                                    to={sub.path}
+                                                    className={`block px-4 py-2 text-sm hover:bg-gray-100 ${location.pathname === sub.path ? "text-[#dcdc3c] font-semibold" : ""
+                                                        }`}
+                                                >
+                                                    {sub.label}
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </>
+                            ) : (
+                                <Link
+                                    to={item.path}
+                                    className={`hover:text-[#dcdc3c] transition duration-200 ${location.pathname === item.path ? "text-[#dcdc3c] font-semibold" : ""
+                                        }`}
+                                >
+                                    {item.label}
+                                </Link>
+                            )}
+                        </li>
+                    );
+                })}
             </ul>
-          </div>
-        )}
-      </div>
-    </nav>
-  );
+
+            <div className="relative" ref={dropdownRef}>
+                <button
+                    onClick={() => setDropdownOpen((prev) => !prev)}
+                    className="flex items-center space-x-2 focus:outline-none"
+                    aria-expanded={dropdownOpen}
+                    aria-haspopup="true"
+                >
+                    <div className="bg-[#dcdc3c] cursor-pointer text-black rounded-full w-10 h-10 flex items-center justify-center uppercase font-bold select-none">
+                        {(user.name && user.name[0]) || user.id[0] || "U"}
+                    </div>
+                    <svg
+                        className={`w-4 h-4 ml-1 transition-transform duration-200 ${dropdownOpen ? "rotate-180" : "rotate-0"
+                            }`}
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+
+                {dropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg text-black ring-1 ring-black ring-opacity-5">
+                        <div className="px-4 py-3 border-b border-gray-200">
+                            <p className="text-sm font-semibold">{user.name || user.id}</p>
+                            <p className="text-xs text-gray-500 capitalize">{user.role}</p>
+                        </div>
+                        <ul>
+                            <li>
+                                <Link
+                                    to={`/${user.role}-dashboard`}
+                                    className="block px-4 py-2 text-sm hover:bg-gray-100"
+                                    onClick={() => setDropdownOpen(false)}
+                                >
+                                    Dashboard
+                                </Link>
+                            </li>
+                            <li>
+                                <button
+                                    onClick={handleLogout}
+                                    className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-red-600"
+                                >
+                                    Logout
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                )}
+            </div>
+        </nav>
+    );
 }

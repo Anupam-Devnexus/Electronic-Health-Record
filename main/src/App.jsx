@@ -23,7 +23,10 @@ function AppContent() {
 
   return (
     <>
-      {!hideNavbar && user && <Navbar />} {/* Show Navbar only if logged in & not on login page */}
+      {!hideNavbar && user && <Navbar />} {/* Render Navbar only if not on login or unauthorized page */}
+      {/* Render the routes */}
+      {/* The Navbar will be hidden on the login and unauthorized pages */}
+      {/* The Navbar will be visible on all other pages */}
       <Routes>
         <Route path="/" element={<Login />} />
 
