@@ -15,7 +15,7 @@ import LabsDashboard from "./pages/Dashboard/Labs/Dashboard";
 import NurseDashboard from "./pages/Dashboard/Nurse/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
 
-import AdminLayout from "../src/pages/Dashboard/Admin/Adminlayou"; // Create this layout
+import AdminLayout from "../src/pages/Dashboard/Admin/Adminlayou";
 
 // userdash 
 import UserDash from "./pages/Dashboard/Admin/User/UserDash";
@@ -25,7 +25,18 @@ import Adduser from "./pages/Dashboard/Admin/User/Adduser";
 // labs
 import LabsDash from "./pages/Dashboard/Admin/Labs/LabsDash";
 import LabReport from "./pages/Dashboard/Admin/Labs/LabReports";
-import LabsAssistants from "./pages/Dashboard/Admin/Labs/LabsAssistanst"; // Assuming this is the correct path
+import LabsAssistants from "./pages/Dashboard/Admin/Labs/LabsAssistanst"; 
+
+
+// finance
+import FinDash from "./pages/Dashboard/Admin/Finance/FinDash"; 
+import Reports from "./pages/Dashboard/Admin/Finance/Reports"; 
+
+// pharmacy
+import PharmacyDash from "./pages/Dashboard/Admin/Pharmacy/PharmacyDash"; 
+import PharmacyInventory from "./pages/Dashboard/Admin/Pharmacy/PharmacyInventry"; // Uncomment if you have a separate inventory page
+import PharmacyIssue from "./pages/Dashboard/Admin/Pharmacy/MedicineIssue"; // Uncomment if you have a separate issue page
+
 
 function AppContent() {
   const location = useLocation();
@@ -34,7 +45,7 @@ function AppContent() {
   const hideNavbar = location.pathname === "/" || location.pathname === "/unauthorized";
 
   return (
-    <>
+    <div className="">
       {!hideNavbar && user && <Navbar />}
 
       <Routes>
@@ -59,7 +70,18 @@ function AppContent() {
           <Route path="/admin-dashboard/labs-dash" element={<LabsDash />} />
           <Route path="/admin-dashboard/labs-report" element={<LabReport />} />
           <Route path="/admin-dashboard/labs-assistants" element={<LabsAssistants />} />
-          
+
+          {/* admin finance routes */}
+          <Route path="/admin-dashboard/finance-dash" element={<FinDash />} />
+          <Route path="/admin-dashboard/finance-reports" element={<Reports />} />
+
+          {/* pharmacy routes */}
+          <Route path="/admin-dashboard/pharmacy-dash" element={<PharmacyDash />} />
+          <Route path="/admin-dashboard/pharmacy-inventory" element={<PharmacyInventory />} />
+          <Route path="/admin-dashboard/pharmacy-issue" element={<PharmacyIssue />} />
+
+          {/* wards routes */}
+
 
         </Route>
 
@@ -93,7 +115,7 @@ function AppContent() {
 
         <Route path="/unauthorized" element={<Unauthorized />} />
       </Routes>
-    </>
+    </div>
   );
 }
 

@@ -44,18 +44,16 @@ export default function Navbar() {
         {
             label: "Finance",
             subItems: [
-                { label: "Dashboard", path: "/admin/finance" },
-                { label: "Billing", path: "/admin/finance/billing" },
-                { label: "Payments", path: "/admin/finance/payments" },
-                { label: "Revenue Reports", path: "/admin/finance/revenue" },
+                { label: "Dashboard", path:"/admin-dashboard/finance-dash" },
+                { label: "Revenue Reports", path:"/admin-dashboard/finance-reports" },
             ],
         },
         {
             label: "Pharmacy",
             subItems: [
-                { label: "Dashboard", path: "/admin/pharmacy" },
-                { label: "Inventory", path: "/admin/pharmacy/inventory" },
-                { label: "Issue Medicine", path: "/admin/pharmacy/issue" },
+                { label: "Dashboard", path: "/admin-dashboard/Pharmacy-dash" },
+                { label: "Inventory", path: "/admin-dashboard/pharmacy-inventory" },
+                { label: "Issue Medicine", path: "/admin-dashboard/pharmacy-issue" },
             ],
         },
         {
