@@ -32,11 +32,13 @@ import LabsAssistants from "./pages/Dashboard/Admin/Labs/LabsAssistanst";
 import FinDash from "./pages/Dashboard/Admin/Finance/FinDash"; 
 import Reports from "./pages/Dashboard/Admin/Finance/Reports"; 
 
-// pharmacy
+// admin pharmacy
 import PharmacyDash from "./pages/Dashboard/Admin/Pharmacy/PharmacyDash"; 
 import PharmacyInventory from "./pages/Dashboard/Admin/Pharmacy/PharmacyInventry"; // Uncomment if you have a separate inventory page
 import PharmacyIssue from "./pages/Dashboard/Admin/Pharmacy/MedicineIssue"; // Uncomment if you have a separate issue page
 
+// admin wards
+import WardsDash from "./pages/Dashboard/Admin/Wards/WardsDash"; // Uncomment if you have a wards dashboard
 
 function AppContent() {
   const location = useLocation();
@@ -81,7 +83,7 @@ function AppContent() {
           <Route path="/admin-dashboard/pharmacy-issue" element={<PharmacyIssue />} />
 
           {/* wards routes */}
-
+          <Route path="/admin-dashboard/wards-dash" element={<WardsDash />} />
 
         </Route>
 

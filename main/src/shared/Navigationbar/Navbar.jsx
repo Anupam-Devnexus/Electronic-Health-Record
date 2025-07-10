@@ -59,7 +59,7 @@ export default function Navbar() {
         {
             label: "Wards",
             subItems: [
-                { label: "Dashboard", path: "/admin/wards" },
+                { label: "Dashboard", path: "/admin-dashboard/wards-dash" },
                 { label: "Patient Admissions", path: "/admin/wards/admissions" },
                 { label: "Bed Allocation", path: "/admin/wards/beds" },
                 { label: "Discharge", path: "/admin/wards/discharge" },
