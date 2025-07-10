@@ -25,19 +25,20 @@ export default function Navbar() {
     const adminMenu = [
         { label: "Dashboard", path: "/admin-dashboard" },
         {
-            label: "Users",
-            subItems: [
-                { label: "Dashboard", path: "/admin/users" },
-                { label: "All Users", path: "/admin/users/allusers" },
-                { label: "Add User", path: "/admin/users/add" },
-            ],
-        },
+  label: "Users",
+  subItems: [
+    { label: "Dashboard", path: "/admin-dashboard/user-dash" },
+    { label: "All Users", path: "/admin-dashboard/allusers" },
+    { label: "Add User", path: "/admin-dashboard/add-user" }, // If this route exists
+  ],
+}
+,
         {
             label: "Labs",
             subItems: [
-                { label: "Dashboard", path: "/admin/labs" },
-                { label: "Test Orders", path: "/admin/labs/orders" },
-                { label: "Reports", path: "/admin/labs/reports" },
+                { label: "Dashboard", path:"/admin-dashboard/labs-dash" },
+                { label: "Reports", path:"/admin-dashboard/labs-report" },
+                { label: "Labs Assistants", path: "/admin-dashboard/labs-assistants" },
             ],
         },
         {

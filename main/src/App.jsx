@@ -1,10 +1,12 @@
-import './App.css';
+import "./App.css";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { AuthProvider, useAuth } from "./pages/auth/AuthContext";
 import ProtectedRoute from "./shared/ProtectedRoutes/ProtectedRoute";
 
-import Navbar from "./shared/Navigationbar/Navbar"; // Import Navbar here
+import Navbar from "./shared/Navigationbar/Navbar";
 
 import Login from "./pages/auth/Login";
 import AdminDashboard from "./pages/Dashboard/Admin/Dashboard";
@@ -13,32 +15,55 @@ import LabsDashboard from "./pages/Dashboard/Labs/Dashboard";
 import NurseDashboard from "./pages/Dashboard/Nurse/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
 
-// Wrapper to handle Navbar visibility based on route & auth
+import AdminLayout from "../src/pages/Dashboard/Admin/Adminlayou"; // Create this layout
+
+// userdash 
+import UserDash from "./pages/Dashboard/Admin/User/UserDash";
+import Alluser from "./pages/Dashboard/Admin/User/Alluser";
+import Adduser from "./pages/Dashboard/Admin/User/Adduser";
+
+// labs
+import LabsDash from "./pages/Dashboard/Admin/Labs/LabsDash";
+import LabReport from "./pages/Dashboard/Admin/Labs/LabReports";
+import LabsAssistants from "./pages/Dashboard/Admin/Labs/LabsAssistanst"; // Assuming this is the correct path
+
 function AppContent() {
   const location = useLocation();
   const { user } = useAuth();
 
-  // Hide navbar on login and unauthorized page
   const hideNavbar = location.pathname === "/" || location.pathname === "/unauthorized";
 
   return (
     <>
-      {!hideNavbar && user && <Navbar />} {/* Render Navbar only if not on login or unauthorized page */}
-      {/* Render the routes */}
-      {/* The Navbar will be hidden on the login and unauthorized pages */}
-      {/* The Navbar will be visible on all other pages */}
+      {!hideNavbar && user && <Navbar />}
+
       <Routes>
         <Route path="/" element={<Login />} />
 
+        {/* Admin nested routes under AdminLayout */}
         <Route
           path="/admin-dashboard"
           element={
             <ProtectedRoute allowedRoles={["admin"]}>
-              <AdminDashboard />
+              <AdminLayout />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route index element={<AdminDashboard />} />
+          {/* admin user routes */}
+          <Route path="/admin-dashboard/allusers" element={<Alluser />} />
+          <Route path="/admin-dashboard/user-dash" element={<UserDash />} />
+          <Route path="/admin-dashboard/add-user" element={<Adduser />} />
 
+          {/* admin labs routes */}
+          <Route path="/admin-dashboard/labs-dash" element={<LabsDash />} />
+          <Route path="/admin-dashboard/labs-report" element={<LabReport />} />
+          <Route path="/admin-dashboard/labs-assistants" element={<LabsAssistants />} />
+          
+
+        </Route>
+
+        {/* Other dashboards */}
         <Route
           path="/doctor-dashboard"
           element={
