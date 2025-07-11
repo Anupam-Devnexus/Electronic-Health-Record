@@ -81,7 +81,54 @@ export default function Navbar() {
         },
     ];
 
-    const menuItems = { admin: adminMenu, doctor: [{ label: "Dashboard", path: "/doctor-dashboard" }, { label: "Appointments", path: "/doctor/appointments" }, { label: "Patients", path: "/doctor/patients" },], labs: [{ label: "Dashboard", path: "/labs-dashboard" }, { label: "Tests", path: "/labs/tests" }, { label: "Reports", path: "/labs/reports" },], accounts: [{ label: "Dashboard", path: "/accounts-dashboard" }, { label: "Invoices", path: "/accounts/invoices" }, { label: "Payments", path: "/accounts/payments" },], };
+   const doctorMenu = [
+  {
+    label: "Dashboard",
+    path: "/doctor-dashboard",
+  },
+  {
+    label: "Appointments",
+    subItems: [
+      { label: "Today's Appointments", path: "/doctor-dashboard/appointments" },
+      { label: "All Appointments", path: "/doctor-dashboard/all-apointments" },
+    ],
+  },
+  {
+    label: "Patients",
+    subItems: [
+      { label: "Current Patient List", path: "/doctor-dashboard/current-patient" },
+      { label: "All Patient", path: "/doctor-dashboard/all-patient" },
+      {label:"Add Patient" , path:"/doctor-dashboard/add-patient"}
+    ],
+  },
+  {
+    label: "Lab Reports",
+    subItems: [
+      { label: "Add Reports", path: "/doctor-lab-reports/add-reports" },
+      { label: "All Reports", path: "/doctor-lab-reports/all-reports" },
+    ],
+  },
+  {
+    label: "Prescriptions",
+    subItems: [
+      { label: "Write Prescription", path: "/doctor-prescriptions/new" },
+      { label: "Prescription History", path: "/doctor-prescriptions/history" },
+    ],
+  },
+  {
+    label: "Performance",
+    subItems: [
+      { label: "Monthly Stats", path: "/doctor-performance/monthly" },
+      { label: "Patient Feedback", path: "/doctor-performance/feedback" },
+    ],
+  },
+];
+
+
+    const menuItems = { 
+        admin: adminMenu, 
+        doctor: doctorMenu,
+         labs: [{ label: "Dashboard", path: "/labs-dashboard" }, { label: "Tests", path: "/labs/tests" }, { label: "Reports", path: "/labs/reports" },], accounts: [{ label: "Dashboard", path: "/accounts-dashboard" }, { label: "Invoices", path: "/accounts/invoices" }, { label: "Payments", path: "/accounts/payments" },], };
 
     const links = menuItems[user.role] || [];
 
@@ -119,7 +166,7 @@ export default function Navbar() {
                                             <li key={sub.path}>
                                                 <Link
                                                     to={sub.path}
-                                                    className={`block px-4 py-2 text-sm hover:bg-gray-100 ${location.pathname === sub.path ? "text-[#dcdc3c] font-semibold" : ""
+                                                    className={`block px-4 py-2 text-sm hover:bg-[var(--clr-lemon)] hover:text-white hover:rounded-md ${location.pathname === sub.path ? "text-[#dcdc3c] font-semibold" : ""
                                                         }`}
                                                 >
                                                     {sub.label}
@@ -177,7 +224,7 @@ export default function Navbar() {
                                     className="block px-4 py-2 text-sm hover:bg-gray-100"
                                     onClick={() => setDropdownOpen(false)}
                                 >
-                                    Dashboard
+                                    Settings and Support
                                 </Link>
                             </li>
                             <li>

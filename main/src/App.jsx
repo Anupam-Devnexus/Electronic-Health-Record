@@ -1,5 +1,5 @@
 import "./App.css";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
@@ -15,7 +15,9 @@ import LabsDashboard from "./pages/Dashboard/Labs/Dashboard";
 import NurseDashboard from "./pages/Dashboard/Nurse/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
 
+// Layouts
 import AdminLayout from "../src/pages/Dashboard/Admin/Adminlayou";
+import DoctorsLayout from "./pages/Dashboard/Doctors/Doctorslayout";
 
 // userdash 
 import UserDash from "./pages/Dashboard/Admin/User/UserDash";
@@ -25,20 +27,20 @@ import Adduser from "./pages/Dashboard/Admin/User/Adduser";
 // labs
 import LabsDash from "./pages/Dashboard/Admin/Labs/LabsDash";
 import LabReport from "./pages/Dashboard/Admin/Labs/LabReports";
-import LabsAssistants from "./pages/Dashboard/Admin/Labs/LabsAssistanst"; 
+import LabsAssistants from "./pages/Dashboard/Admin/Labs/LabsAssistanst";
 
 
 // finance
-import FinDash from "./pages/Dashboard/Admin/Finance/FinDash"; 
-import Reports from "./pages/Dashboard/Admin/Finance/Reports"; 
+import FinDash from "./pages/Dashboard/Admin/Finance/FinDash";
+import Reports from "./pages/Dashboard/Admin/Finance/Reports";
 
 // admin pharmacy
-import PharmacyDash from "./pages/Dashboard/Admin/Pharmacy/PharmacyDash"; 
-import PharmacyInventory from "./pages/Dashboard/Admin/Pharmacy/PharmacyInventry"; // Uncomment if you have a separate inventory page
-import PharmacyIssue from "./pages/Dashboard/Admin/Pharmacy/MedicineIssue"; // Uncomment if you have a separate issue page
+import PharmacyDash from "./pages/Dashboard/Admin/Pharmacy/PharmacyDash";
+import PharmacyInventory from "./pages/Dashboard/Admin/Pharmacy/PharmacyInventry";
+import PharmacyIssue from "./pages/Dashboard/Admin/Pharmacy/MedicineIssue";
 
 // admin wards
-import WardsDash from "./pages/Dashboard/Admin/Wards/WardsDash"; // Uncomment if you have a wards dashboard
+import WardsDash from "./pages/Dashboard/Admin/Wards/WardsDash";
 
 // Reports
 import RevenueReports from "./pages/Dashboard/Reports/ReportRevenue";
@@ -48,7 +50,15 @@ import ReportDash from "./pages/Dashboard/Reports/ReportDash"
 import Teamdash from "./pages/Dashboard/Team/TeamDash";
 import Teamdoc from "./pages/Dashboard/Team/TeamDoct";
 import Teamnurse from "./pages/Dashboard/Team/TeamNurse";
-import Teamlabs from "./pages/Dashboard/Team/TeamLabstaff"
+import Teamlabs from "./pages/Dashboard/Team/TeamLabstaff";
+
+
+// Doctor Route starts here
+import DoctorAppoinment from "./pages/Dashboard/Doctors/Appoinments/TodayAppoinment";
+import AllApoinment from "./pages/Dashboard/Doctors/Appoinments/AllApoinment";
+import CurrentPatientList from "./pages/Dashboard/Doctors/Patient/CurrentPatientList";
+import AllPatient from "./pages/Dashboard/Doctors/Patient/AllPatient";
+import AddPatient from "./pages/Dashboard/Doctors/Patient/AddPatient";
 
 function AppContent() {
   const location = useLocation();
@@ -100,22 +110,34 @@ function AppContent() {
           <Route path="/admin-dashboard/reports-revenue" element={<RevenueReports />} />
 
           {/* admin team route */}
-          <Route path="/admin-dashboard/team-dash" element={<Teamdash/>}/>
-          <Route path="/admin-dashboard/team-doctor" element={<Teamdoc/>}/>
-          <Route path="/admin-dashboard/team-nurse" element={<Teamnurse/>}/>
-          <Route path ="/admin-dashboard/team-lab" element={<Teamlabs/>}/>
+          <Route path="/admin-dashboard/team-dash" element={<Teamdash />} />
+          <Route path="/admin-dashboard/team-doctor" element={<Teamdoc />} />
+          <Route path="/admin-dashboard/team-nurse" element={<Teamnurse />} />
+          <Route path="/admin-dashboard/team-lab" element={<Teamlabs />} />
 
         </Route>
 
-        {/* Other dashboards */}
+        {/* doctor dashboards */}
         <Route
           path="/doctor-dashboard"
           element={
             <ProtectedRoute allowedRoles={["doctor"]}>
-              <DoctorDashboard />
+              <DoctorsLayout />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route index element={<DoctorDashboard />} />
+          {/* appoinments */}
+          <Route path="/doctor-dashboard/appointments" element={<DoctorAppoinment />} />
+          <Route path="/doctor-dashboard/all-apointments" element={<AllApoinment/>}/>
+          <Route path="/doctor-dashboard/current-patient" element ={<CurrentPatientList/>}/>
+
+          {/* Patient */}
+          <Route path ="/doctor-dashboard/current-patient" element={<CurrentPatientList/>}/>
+          <Route path ="/doctor-dashboard/all-patient" element={<AllPatient/>}/>
+          <Route path="/doctor-dashboard/add-patient" element={<AddPatient/>}/>
+
+        </Route>
 
         <Route
           path="/labs-dashboard"

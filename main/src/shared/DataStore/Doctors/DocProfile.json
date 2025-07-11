@@ -1,0 +1,73 @@
+[
+  {
+    "id": "D1001",
+    "fullName": "Dr. Anupam Upadhyay",
+    "specialization": "Cardiologist",
+    "photo": "https://randomuser.me/api/portraits/men/32.jpg",
+    "email": "anupam.upadhyay@hospital.com",
+    "phone": "+91-9876543210",
+    "gender": "Male",
+    "age": 33,
+    "experience": "10 Years",
+    "qualifications": ["MBBS", "MD (Cardiology)"],
+    "department": "Cardiology",
+    "availability": {
+      "status": "Online",
+      "timings": "Mon - Fri, 10:00 AM - 5:00 PM"
+    },
+    "stats": {
+      "totalPatients": 1287,
+      "appointmentsToday": 12,
+      "pendingLabReports": 4,
+      "prescriptionsGiven": 845
+    },
+    "address": "Prime Hospital, Sector 45, New Delhi",
+    "joinedDate": "2015-06-01",
+    "appointments": [
+      {
+        "appointmentId": "A1001",
+        "patientName": "Rajesh Kumar",
+        "date": "2025-07-11",
+        "time": "10:00 AM",
+        "type": "Online",
+        "status": "Scheduled",
+        "reason": "Routine Checkup"
+      },
+      {
+        "appointmentId": "A1002",
+        "patientName": "Sneha Verma",
+        "date": "2025-07-11",
+        "time": "11:30 AM",
+        "type": "In-person",
+        "status": "Completed",
+        "reason": "Chest Pain"
+      }
+    ],
+    "patients": [
+      {
+        "patientId": "P20001",
+        "firstName": "Rajesh",
+        "lastName": "Kumar",
+        "age": 45,
+        "gender": "Male",
+        "phone": "+91-9876543210",
+        "email": "rajesh.kumar@example.com",
+        "address": "123 MG Road, Delhi",
+        "admissionDate": "2025-07-01",
+        "photo": "https://randomuser.me/api/portraits/men/22.jpg"
+      },
+      {
+        "patientId": "P20002",
+        "firstName": "Sneha",
+        "lastName": "Verma",
+        "age": 29,
+        "gender": "Female",
+        "phone": "+91-9876543211",
+        "email": "sneha.verma@example.com",
+        "address": "56 Nehru Nagar, Lucknow",
+        "admissionDate": "2025-07-03",
+        "photo": "https://randomuser.me/api/portraits/women/44.jpg"
+      }
+    ]
+  }
+]
