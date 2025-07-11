@@ -60,25 +60,22 @@ export default function Navbar() {
             label: "Wards",
             subItems: [
                 { label: "Dashboard", path: "/admin-dashboard/wards-dash" },
-                { label: "Patient Admissions", path: "/admin/wards/admissions" },
-                { label: "Bed Allocation", path: "/admin/wards/beds" },
-                { label: "Discharge", path: "/admin/wards/discharge" },
             ],
         },
         {
             label: "Reports",
             subItems: [
-                { label: "Appointment Report", path: "/admin/reports/appointments" },
-                { label: "Revenue Report", path: "/admin/reports/revenue" },
+                { label: "Dashboard", path: "/admin-dashboard/reports-dash" },
+                { label: "Revenue Report", path: "/admin-dashboard/reports-revenue" },
             ],
         },
         {
             label: "Teams",
             subItems: [
-                { label: "Dashboard", path: "/admin/teams" },
-                { label: "Doctors", path: "/admin/teams/doctors" },
-                { label: "Nurses", path: "/admin/teams/nurses" },
-                { label: "Labs Staff", path: "/admin/teams/labs" },
+                { label: "Dashboard", path: "/admin-dashboard/team-dash" },
+                { label: "Doctors", path: "/admin-dashboard/team-doctor" },
+                { label: "Nurses", path: "/admin-dashboard/team-nurse" },
+                { label: "Labs Staff", path: "/admin-dashboard/team-lab" },
 
             ],
         },

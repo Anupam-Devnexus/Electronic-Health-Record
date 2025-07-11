@@ -27,9 +27,7 @@ export default function RevenueChart({ data }) {
 
   return (
     <div className="p-4 bg-white rounded shadow w-full">
-      <h2 className="text-xl font-semibold mb-4 text-[var(--clr-lemon)]">
-        Monthly Revenue Breakdown
-      </h2>
+
       <ResponsiveContainer width="100%" height={400}>
         <BarChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />

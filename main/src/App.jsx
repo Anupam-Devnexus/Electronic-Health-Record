@@ -40,6 +40,16 @@ import PharmacyIssue from "./pages/Dashboard/Admin/Pharmacy/MedicineIssue"; // U
 // admin wards
 import WardsDash from "./pages/Dashboard/Admin/Wards/WardsDash"; // Uncomment if you have a wards dashboard
 
+// Reports
+import RevenueReports from "./pages/Dashboard/Reports/ReportRevenue";
+import ReportDash from "./pages/Dashboard/Reports/ReportDash"
+
+// admin team
+import Teamdash from "./pages/Dashboard/Team/TeamDash";
+import Teamdoc from "./pages/Dashboard/Team/TeamDoct";
+import Teamnurse from "./pages/Dashboard/Team/TeamNurse";
+import Teamlabs from "./pages/Dashboard/Team/TeamLabstaff"
+
 function AppContent() {
   const location = useLocation();
   const { user } = useAuth();
@@ -84,6 +94,16 @@ function AppContent() {
 
           {/* wards routes */}
           <Route path="/admin-dashboard/wards-dash" element={<WardsDash />} />
+
+          {/* Report routes */}
+          <Route path="/admin-dashboard/reports-dash" element={<ReportDash />} />
+          <Route path="/admin-dashboard/reports-revenue" element={<RevenueReports />} />
+
+          {/* admin team route */}
+          <Route path="/admin-dashboard/team-dash" element={<Teamdash/>}/>
+          <Route path="/admin-dashboard/team-doctor" element={<Teamdoc/>}/>
+          <Route path="/admin-dashboard/team-nurse" element={<Teamnurse/>}/>
+          <Route path ="/admin-dashboard/team-lab" element={<Teamlabs/>}/>
 
         </Route>
 
