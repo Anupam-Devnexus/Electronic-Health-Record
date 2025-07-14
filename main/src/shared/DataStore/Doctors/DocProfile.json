@@ -104,7 +104,48 @@
         "workingDays": 20,
         "onLeaveDays": 2
       }
-    }
+    },
+    "feedbacks": [
+      {
+        "feedbackId": "F1001",
+        "patientId": "P20001",
+        "patientName": "Rajesh Kumar",
+        "rating": 5,
+        "comment": "Dr. Kaushik was very attentive and explained everything clearly.",
+        "date": "2025-07-11"
+      },
+      {
+        "feedbackId": "F1002",
+        "patientId": "P20002",
+        "patientName": "Sneha Verma",
+        "rating": 4,
+        "comment": "Good consultation, but the waiting time was a bit long.",
+        "date": "2025-07-12"
+      },
+      {
+        "feedbackId": "F1003",
+        "patientId": "P20003",
+        "patientName": "Amit Yadav",
+        "rating": 5,
+        "comment": "Excellent doctor. Very polite and professional.",
+        "date": "2025-07-13"
+      },
+      {
+        "feedbackId": "F1004",
+        "patientId": "P20004",
+        "patientName": "Priya Sharma",
+        "rating": 4,
+        "comment": "Satisfied with the treatment. Will recommend to others.",
+        "date": "2025-07-14"
+      },
+      {
+        "feedbackId": "F1005",
+        "patientId": "P20005",
+        "patientName": "Vikram Singh",
+        "rating": 3,
+        "comment": "Doctor is good but appointment time was not followed.",
+        "date": "2025-07-14"
+      }
+    ]
   }
 ]
-
