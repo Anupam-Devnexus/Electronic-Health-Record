@@ -60,6 +60,19 @@ import CurrentPatientList from "./pages/Dashboard/Doctors/Patient/CurrentPatient
 import AllPatient from "./pages/Dashboard/Doctors/Patient/AllPatient";
 import AddPatient from "./pages/Dashboard/Doctors/Patient/AddPatient";
 
+// Doctor Lab Report
+import DoctLabReports from "./pages/Dashboard/Doctors/LabReports/AllReports";
+import AddReport from "./pages/Dashboard/Doctors/LabReports/AddReport";
+
+// Prescription 
+import AddPriscription from "./pages/Dashboard/Doctors/Prescription/AddPrescription";
+import AllPriscription from "./pages/Dashboard/Doctors/Prescription/AllPrescription";
+
+// Doct Performance
+import DoctStats from "./pages/Dashboard/Doctors/Performance/DoctSats";
+import PatientFeedback from "./pages/Dashboard/Doctors/Performance/PatientFeedback";
+
+
 function AppContent() {
   const location = useLocation();
   const { user } = useAuth();
@@ -136,6 +149,19 @@ function AppContent() {
           <Route path ="/doctor-dashboard/current-patient" element={<CurrentPatientList/>}/>
           <Route path ="/doctor-dashboard/all-patient" element={<AllPatient/>}/>
           <Route path="/doctor-dashboard/add-patient" element={<AddPatient/>}/>
+
+          {/* Reports */}
+          <Route path="/doctor-dashboard/reports" element={<DoctLabReports/>}/>
+          <Route path="/doctor-dashboard/add-reports" element={<AddReport/>}/>
+
+          {/* Prescription */}
+          <Route path="/doctor-dashboard/all-prescription" element={<AllPriscription/>}/>
+          <Route path="/doctor-dashboard/add-prescription" element={<AddPriscription/>}/>
+
+          {/* Performance */}
+          <Route path="/doctor-dashboard/stats" element={<DoctStats/>}/>
+          <Route path ="/doctor-dashboard/feedbacks" element={<PatientFeedback/>}/>
+
 
         </Route>
 

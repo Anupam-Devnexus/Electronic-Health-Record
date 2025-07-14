@@ -1,10 +1,10 @@
 [
   {
     "id": "D1001",
-    "fullName": "Dr. Anupam Upadhyay",
+    "fullName": "Dr.Ashish Kaushik",
     "specialization": "Cardiologist",
     "photo": "https://randomuser.me/api/portraits/men/32.jpg",
-    "email": "anupam.upadhyay@hospital.com",
+    "email": "asshish.kaushik@hospital.com",
     "phone": "+91-9876543210",
     "gender": "Male",
     "age": 33,
@@ -68,6 +68,43 @@
         "admissionDate": "2025-07-03",
         "photo": "https://randomuser.me/api/portraits/women/44.jpg"
       }
-    ]
+    ],
+    "monthlyStats": {
+      "month": "July 2025",
+      "appointmentStats": {
+        "total": 120,
+        "completed": 105,
+        "cancelled": 8,
+        "noShow": 7,
+        "newPatients": 28
+      },
+      "patientStats": {
+        "uniqueSeen": 88,
+        "followUps": 32,
+        "inpatients": 12,
+        "outpatients": 76
+      },
+      "prescriptionStats": {
+        "total": 98,
+        "mostCommonDiagnosis": "Hypertension",
+        "averagePrescriptionsPerPatient": 1.1
+      },
+      "labStats": {
+        "testsOrdered": 65,
+        "reportsReviewed": 58,
+        "pending": 7
+      },
+      "revenueStats": {
+        "total": 48000,
+        "currency": "INR",
+        "averagePerPatient": 545
+      },
+      "timeStats": {
+        "avgConsultationTimeMins": 11,
+        "workingDays": 20,
+        "onLeaveDays": 2
+      }
+    }
   }
 ]
+

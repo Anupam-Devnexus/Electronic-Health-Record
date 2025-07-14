@@ -14,16 +14,16 @@ export default function LabReport({ reports }) {
           <div className=" flex flex-col gap-3 border-b pb-4">
             <h1 className="text-4xl font-bold text-[var(--clr-lemon)]">Lab Test Report</h1>
             <p className="text-gray-600 text-3xl">Name: {report.technician.name}</p>
-<div className="flex items-center gap-3"> 
+            <div className="flex items-center gap-3">
 
-            <p className="text-gray-600 border-b-1">Lab Name: {report.labName}</p> -
-            <p className="text-gray-600 border-b-1">Lab ID: {report.labId}</p> -
+              <p className="text-gray-600 border-b-1">Lab Name: {report.labName}</p> -
+              <p className="text-gray-600 border-b-1">Lab ID: {report.labId}</p> -
 
-            <p className="text-gray-600 border-b-1">Test ID: {report.labTestId}</p> -
-            <p className="text-gray-600 border-b-1">Patient ID: {report.patientId}</p> -
-            <p className="text-gray-600 border-b-1">Doctor ID: {report.doctorId}</p>
-</div>
-  
+              <p className="text-gray-600 border-b-1">Test ID: {report.labTestId}</p> -
+              <p className="text-gray-600 border-b-1">Patient ID: {report.patientId}</p> -
+              <p className="text-gray-600 border-b-1">Doctor ID: {report.doctorId}</p>
+            </div>
+
           </div>
 
           {/* Test Info */}

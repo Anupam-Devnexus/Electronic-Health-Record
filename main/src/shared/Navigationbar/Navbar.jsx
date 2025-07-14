@@ -104,22 +104,22 @@ export default function Navbar() {
   {
     label: "Lab Reports",
     subItems: [
-      { label: "Add Reports", path: "/doctor-lab-reports/add-reports" },
-      { label: "All Reports", path: "/doctor-lab-reports/all-reports" },
+      { label: "Add Reports", path: "/doctor-dashboard/add-reports" },
+      { label: "All Reports", path: "/doctor-dashboard/reports" },
     ],
   },
   {
     label: "Prescriptions",
     subItems: [
-      { label: "Write Prescription", path: "/doctor-prescriptions/new" },
-      { label: "Prescription History", path: "/doctor-prescriptions/history" },
+      { label: "Write Prescription", path: "/doctor-dashboard/add-prescription" },
+      { label: "Prescription History", path: "/doctor-dashboard/all-prescription" },
     ],
   },
   {
     label: "Performance",
     subItems: [
-      { label: "Monthly Stats", path: "/doctor-performance/monthly" },
-      { label: "Patient Feedback", path: "/doctor-performance/feedback" },
+      { label: "Monthly Stats", path: "/doctor-dashboard/stats" },
+      { label: "Patient Feedback", path: "/doctor-dashboard/feedbacks" },
     ],
   },
 ];
