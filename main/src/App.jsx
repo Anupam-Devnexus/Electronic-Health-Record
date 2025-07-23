@@ -8,87 +8,101 @@ import ProtectedRoute from "./shared/ProtectedRoutes/ProtectedRoute";
 
 import Navbar from "./shared/Navigationbar/Navbar";
 
+// Auth and Unauthorized
 import Login from "./pages/auth/Login";
-import AdminDashboard from "./pages/Dashboard/Admin/Dashboard";
-import DoctorDashboard from "./pages/Dashboard/Doctors/Dashboard";
-import LabsDashboard from "./pages/Dashboard/Labs/Dashboard";
-import NurseDashboard from "./pages/Dashboard/Nurse/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
 
 // Layouts
-import AdminLayout from "../src/pages/Dashboard/Admin/Adminlayou";
+import AdminLayout from "./pages/Dashboard/Admin/Adminlayou";
 import DoctorsLayout from "./pages/Dashboard/Doctors/Doctorslayout";
+import LabLayout from "./pages/Dashboard/Labs/Labslayout";
+import AccountLayout from "./pages/Dashboard/Accounts/AccountsLayout";
 
-// userdash 
+// Admin pages
+import AdminDashboard from "./pages/Dashboard/Admin/Dashboard";
 import UserDash from "./pages/Dashboard/Admin/User/UserDash";
 import Alluser from "./pages/Dashboard/Admin/User/Alluser";
 import Adduser from "./pages/Dashboard/Admin/User/Adduser";
-
-// labs
 import LabsDash from "./pages/Dashboard/Admin/Labs/LabsDash";
 import LabReport from "./pages/Dashboard/Admin/Labs/LabReports";
 import LabsAssistants from "./pages/Dashboard/Admin/Labs/LabsAssistanst";
-
-
-// finance
 import FinDash from "./pages/Dashboard/Admin/Finance/FinDash";
 import Reports from "./pages/Dashboard/Admin/Finance/Reports";
-
-// admin pharmacy
 import PharmacyDash from "./pages/Dashboard/Admin/Pharmacy/PharmacyDash";
 import PharmacyInventory from "./pages/Dashboard/Admin/Pharmacy/PharmacyInventry";
 import PharmacyIssue from "./pages/Dashboard/Admin/Pharmacy/MedicineIssue";
-
-// admin wards
 import WardsDash from "./pages/Dashboard/Admin/Wards/WardsDash";
-
-// Reports
 import RevenueReports from "./pages/Dashboard/Reports/ReportRevenue";
-import ReportDash from "./pages/Dashboard/Reports/ReportDash"
-
-// admin team
+import ReportDash from "./pages/Dashboard/Reports/ReportDash";
 import Teamdash from "./pages/Dashboard/Team/TeamDash";
 import Teamdoc from "./pages/Dashboard/Team/TeamDoct";
 import Teamnurse from "./pages/Dashboard/Team/TeamNurse";
 import Teamlabs from "./pages/Dashboard/Team/TeamLabstaff";
 
-
-// Doctor Route starts here
+// Doctor pages
+import DoctorDashboard from "./pages/Dashboard/Doctors/Dashboard";
 import DoctorAppoinment from "./pages/Dashboard/Doctors/Appoinments/TodayAppoinment";
 import AllApoinment from "./pages/Dashboard/Doctors/Appoinments/AllApoinment";
 import CurrentPatientList from "./pages/Dashboard/Doctors/Patient/CurrentPatientList";
 import AllPatient from "./pages/Dashboard/Doctors/Patient/AllPatient";
 import AddPatient from "./pages/Dashboard/Doctors/Patient/AddPatient";
-
-// Doctor Lab Report
 import DoctLabReports from "./pages/Dashboard/Doctors/LabReports/AllReports";
 import AddReport from "./pages/Dashboard/Doctors/LabReports/AddReport";
-
-// Prescription 
 import AddPriscription from "./pages/Dashboard/Doctors/Prescription/AddPrescription";
 import AllPriscription from "./pages/Dashboard/Doctors/Prescription/AllPrescription";
-
-// Doct Performance
 import DoctStats from "./pages/Dashboard/Doctors/Performance/DoctSats";
 import PatientFeedback from "./pages/Dashboard/Doctors/Performance/PatientFeedback";
 
+// Labs pages
+import LabsDashboard from "./pages/Dashboard/Labs/Dashboard";
+import AllReports from "./pages/Dashboard/Labs/Report/AllReport";
+import Uploadreport from "./pages/Dashboard/Labs/Report/Uploadreport";
+import PendingLabReport from "./pages/Dashboard/Labs/Report/PendingLabReport";
+import DoctorRequest from "./pages/Dashboard/Labs/Request/DoctorRequest";
+import NurserRequest from "./pages/Dashboard/Labs/Request/NurseRequest";
+import LabPayment from "./pages/Dashboard/Labs/Billing/PaymentRecevied";
+import LabInvoices from "./pages/Dashboard/Labs/Billing/LabInvoices";
+import LabGenerateBill from "./pages/Dashboard/Labs/Billing/GenerateBill";
+import AllLabPatient from "./pages/Dashboard/Labs/Patient/AllPatient";
+import AddLabPatient from "./pages/Dashboard/Labs/Patient/AddPatient";
+import LabPAtientHistory from "./pages/Dashboard/Labs/Patient/PatientHistory";
+import LabEquipment from "./pages/Dashboard/Labs/Inventory/LabEquipment";
+import StockManagement from "./pages/Dashboard/Labs/Inventory/StockManagement";
+import Labmonthly from "./pages/Dashboard/Labs/Performance/MonthlyAnalytics";
+import LabTechLog from "./pages/Dashboard/Labs/Performance/TechLogs";
+
+// Accounts page
+import AccountsDashboard from "./pages/Dashboard/Accounts/Dashboard";
+import Invoices from "./pages/Dashboard/Accounts/Billing/Invoices";
+import CreateInvoice from "./pages/Dashboard/Accounts/Billing/CreateInvoice";
+import Payment from "./pages/Dashboard/Accounts/Billing/Payment";
+import Refunds from "./pages/Dashboard/Accounts/Billing/Refunds";
+import ExpenseList from "./pages/Dashboard/Accounts/Expense/ExpenseList";
+import AddExpense from "./pages/Dashboard/Accounts/Expense/AddExpense";
+import InsuranceClaim from "./pages/Dashboard/Accounts/Insurance/Claim";
+import SubmitInsurance from "./pages/Dashboard/Accounts/Insurance/SubmitInsurance";
+import InsuranceReport from "./pages/Dashboard/Accounts/Insurance/InsuranceReport";
+import Report from "./pages/Dashboard/Accounts/Reports/Reports";
+import AccountUser from "./pages/Dashboard/Accounts/User/User"
 
 function AppContent() {
   const location = useLocation();
   const { user } = useAuth();
 
-  const hideNavbar = location.pathname === "/" || location.pathname === "/unauthorized";
+  // Hide navbar on login and unauthorized page
+  const noNavbarPaths = ["/", "/unauthorized"];
+  const hideNavbar = noNavbarPaths.includes(location.pathname);
 
   return (
-    <div className="">
+    <>
       {!hideNavbar && user && <Navbar />}
-
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
 
-        {/* Admin nested routes under AdminLayout */}
+        {/* Admin */}
         <Route
-          path="/admin-dashboard"
+          path="/admin-dashboard/*"
           element={
             <ProtectedRoute allowedRoles={["admin"]}>
               <AdminLayout />
@@ -96,43 +110,35 @@ function AppContent() {
           }
         >
           <Route index element={<AdminDashboard />} />
-          {/* admin user routes */}
-          <Route path="/admin-dashboard/allusers" element={<Alluser />} />
-          <Route path="/admin-dashboard/user-dash" element={<UserDash />} />
-          <Route path="/admin-dashboard/add-user" element={<Adduser />} />
+          <Route path="allusers" element={<Alluser />} />
+          <Route path="user-dash" element={<UserDash />} />
+          <Route path="add-user" element={<Adduser />} />
 
-          {/* admin labs routes */}
-          <Route path="/admin-dashboard/labs-dash" element={<LabsDash />} />
-          <Route path="/admin-dashboard/labs-report" element={<LabReport />} />
-          <Route path="/admin-dashboard/labs-assistants" element={<LabsAssistants />} />
+          <Route path="labs-dash" element={<LabsDash />} />
+          <Route path="labs-report" element={<LabReport />} />
+          <Route path="labs-assistants" element={<LabsAssistants />} />
 
-          {/* admin finance routes */}
-          <Route path="/admin-dashboard/finance-dash" element={<FinDash />} />
-          <Route path="/admin-dashboard/finance-reports" element={<Reports />} />
+          <Route path="finance-dash" element={<FinDash />} />
+          <Route path="finance-reports" element={<Reports />} />
 
-          {/* pharmacy routes */}
-          <Route path="/admin-dashboard/pharmacy-dash" element={<PharmacyDash />} />
-          <Route path="/admin-dashboard/pharmacy-inventory" element={<PharmacyInventory />} />
-          <Route path="/admin-dashboard/pharmacy-issue" element={<PharmacyIssue />} />
+          <Route path="pharmacy-dash" element={<PharmacyDash />} />
+          <Route path="pharmacy-inventory" element={<PharmacyInventory />} />
+          <Route path="pharmacy-issue" element={<PharmacyIssue />} />
 
-          {/* wards routes */}
-          <Route path="/admin-dashboard/wards-dash" element={<WardsDash />} />
+          <Route path="wards-dash" element={<WardsDash />} />
 
-          {/* Report routes */}
-          <Route path="/admin-dashboard/reports-dash" element={<ReportDash />} />
-          <Route path="/admin-dashboard/reports-revenue" element={<RevenueReports />} />
+          <Route path="reports-dash" element={<ReportDash />} />
+          <Route path="reports-revenue" element={<RevenueReports />} />
 
-          {/* admin team route */}
-          <Route path="/admin-dashboard/team-dash" element={<Teamdash />} />
-          <Route path="/admin-dashboard/team-doctor" element={<Teamdoc />} />
-          <Route path="/admin-dashboard/team-nurse" element={<Teamnurse />} />
-          <Route path="/admin-dashboard/team-lab" element={<Teamlabs />} />
-
+          <Route path="team-dash" element={<Teamdash />} />
+          <Route path="team-doctor" element={<Teamdoc />} />
+          <Route path="team-nurse" element={<Teamnurse />} />
+          <Route path="team-lab" element={<Teamlabs />} />
         </Route>
 
-        {/* doctor dashboards */}
+        {/* Doctor */}
         <Route
-          path="/doctor-dashboard"
+          path="/doctor-dashboard/*"
           element={
             <ProtectedRoute allowedRoles={["doctor"]}>
               <DoctorsLayout />
@@ -140,52 +146,71 @@ function AppContent() {
           }
         >
           <Route index element={<DoctorDashboard />} />
-          {/* appoinments */}
-          <Route path="/doctor-dashboard/appointments" element={<DoctorAppoinment />} />
-          <Route path="/doctor-dashboard/all-apointments" element={<AllApoinment/>}/>
-          <Route path="/doctor-dashboard/current-patient" element ={<CurrentPatientList/>}/>
-
-          {/* Patient */}
-          <Route path ="/doctor-dashboard/current-patient" element={<CurrentPatientList/>}/>
-          <Route path ="/doctor-dashboard/all-patient" element={<AllPatient/>}/>
-          <Route path="/doctor-dashboard/add-patient" element={<AddPatient/>}/>
-
-          {/* Reports */}
-          <Route path="/doctor-dashboard/reports" element={<DoctLabReports/>}/>
-          <Route path="/doctor-dashboard/add-reports" element={<AddReport/>}/>
-
-          {/* Prescription */}
-          <Route path="/doctor-dashboard/all-prescription" element={<AllPriscription/>}/>
-          <Route path="/doctor-dashboard/add-prescription" element={<AddPriscription/>}/>
-
-          {/* Performance */}
-          <Route path="/doctor-dashboard/stats" element={<DoctStats/>}/>
-          <Route path ="/doctor-dashboard/feedbacks" element={<PatientFeedback/>}/>
-
-
+          <Route path="appointments" element={<DoctorAppoinment />} />
+          <Route path="all-apointments" element={<AllApoinment />} />
+          <Route path="current-patient" element={<CurrentPatientList />} />
+          <Route path="all-patient" element={<AllPatient />} />
+          <Route path="add-patient" element={<AddPatient />} />
+          <Route path="reports" element={<DoctLabReports />} />
+          <Route path="add-reports" element={<AddReport />} />
+          <Route path="all-prescription" element={<AllPriscription />} />
+          <Route path="add-prescription" element={<AddPriscription />} />
+          <Route path="stats" element={<DoctStats />} />
+          <Route path="feedbacks" element={<PatientFeedback />} />
         </Route>
 
+        {/* Labs */}
         <Route
-          path="/labs-dashboard"
+          path="/labs-dashboard/*"
           element={
             <ProtectedRoute allowedRoles={["labs"]}>
-              <LabsDashboard />
+              <LabLayout />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route index element={<LabsDashboard />} />
+          <Route path="all-report" element={<AllReports />} />
+          <Route path="upload-report" element={<Uploadreport />} />
+          <Route path="pending-reports" element={<PendingLabReport />} />
+          <Route path="doctor-request" element={<DoctorRequest />} />
+          <Route path="nurse-request" element={<NurserRequest />} />
+          <Route path="all-patient" element={<AllLabPatient />} />
+          <Route path="add-patient" element={<AddLabPatient />} />
+          <Route path="patient-history" element={<LabPAtientHistory />} />
+          <Route path="invoices" element={<LabInvoices />} />
+          <Route path="payments" element={<LabPayment />} />
+          <Route path="generate-bill" element={<LabGenerateBill />} />
+          <Route path="equipment" element={<LabEquipment />} />
+          <Route path="stock" element={<StockManagement />} />
+          <Route path="analytics" element={<Labmonthly />} />
+          <Route path="technician-logs" element={<LabTechLog />} />
+        </Route>
 
+        {/* Accounts */}
         <Route
-          path="/nurse-dashboard"
+          path="/accounts-dashboard/*"
           element={
-            <ProtectedRoute allowedRoles={["nurse"]}>
-              <NurseDashboard />
+            <ProtectedRoute allowedRoles={["accounts"]}>
+              <AccountLayout />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route index element={<AccountsDashboard />} />
+          <Route path="invoices" element={<Invoices />} />
+          <Route path="invoices/create" element={<CreateInvoice />} />
+          <Route path="payments" element={<Payment />} />
+          <Route path="refunds" element={<Refunds />} />
+          <Route path="expenses" element={<ExpenseList />} />
+          <Route path="expenses/add" element={<AddExpense />} />
+          <Route path="insurance-claims" element={<InsuranceClaim />} />
+          <Route path="insurance-claims/submit" element={<SubmitInsurance />} />
+          <Route path="insurance-claims/reports" element={<InsuranceReport />} />
+          <Route path="reports" element={<Report/>}/>
+          <Route path ="users" element={<AccountUser/>}/>
 
-        <Route path="/unauthorized" element={<Unauthorized />} />
+        </Route>
       </Routes>
-    </div>
+    </>
   );
 }
 
